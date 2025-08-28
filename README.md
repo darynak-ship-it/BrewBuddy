@@ -1,6 +1,6 @@
 # Brew Buddy 🍵
 
-A delightful, minimalistic iOS app that helps users track the fermentation of their kombucha with beautiful animations and timely notifications.
+Fun and minimalistic iOS app that helps you track the fermentation of the kombucha.
 
 ## Features
 
@@ -61,13 +61,7 @@ The app follows a clean MVVM architecture:
 
 ## Future Enhancements
 
-- Multiple batch tracking
-- Temperature monitoring integration
 - Recipe sharing
 - Social features
-- Export fermentation data
-- Advanced analytics and trends
-
----
-
-Made with ❤️ for kombucha enthusiasts everywhere! 
+- Advices on better brews
+  
