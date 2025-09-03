@@ -170,16 +170,8 @@ struct EditFermentationSheet: View {
                     }
                     
                     // Save button
-                    Button(action: saveChanges) {
-                        Text("Update Duration")
-                            .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: adaptiveButtonHeight)
-                            .background(Color.green)
-                            .cornerRadius(adaptiveButtonCornerRadius)
-                    }
-                    .padding(.top, 20)
+                    CTAButton("Update Duration", style: .primary, action: saveChanges)
+                        .padding(.top, 20)
                 }
                 .padding(.horizontal, adaptiveHorizontalPadding)
                 .padding(.top, adaptiveVerticalPadding)
@@ -312,7 +304,7 @@ struct EditFermentationSheet: View {
     }
     
     private var adaptiveButtonSpacing: CGFloat {
-        isLargeDevice ? 16 : 12
+        isLargeDevice ? 18 : 14
     }
     
     private var adaptiveButtonFontSize: CGFloat {
@@ -328,11 +320,11 @@ struct EditFermentationSheet: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 25 : 20
+        isLargeDevice ? 30 : 25
     }
     
     private var adaptiveVerticalPadding: CGFloat {
-        isLargeDevice ? 20 : 16
+        isLargeDevice ? 30 : 25
     }
 }
 

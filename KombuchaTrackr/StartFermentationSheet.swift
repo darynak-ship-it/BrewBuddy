@@ -100,16 +100,8 @@ struct StartFermentationSheet: View {
                     Spacer()
                     
                     // CTA button
-                    Button(action: startFermentation) {
-                        Text("Let's Go!")
-                            .font(.system(size: adaptiveStartButtonFontSize, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: adaptiveStartButtonHeight)
-                            .background(Color.green)
-                            .cornerRadius(adaptiveStartButtonCornerRadius)
-                    }
-                    .disabled(selectedDays <= 0)
+                    CTAButton("Let's Go!", style: .primary, action: startFermentation)
+                        .disabled(selectedDays <= 0)
                 }
                 .padding(.horizontal, adaptiveHorizontalPadding)
                 .padding(.vertical, adaptiveVerticalPadding)
@@ -234,7 +226,7 @@ struct StartFermentationSheet: View {
     }
     
     private var adaptiveVerticalPadding: CGFloat {
-        isLargeDevice ? 20 : 16
+        isLargeDevice ? 30 : 25
     }
 }
 

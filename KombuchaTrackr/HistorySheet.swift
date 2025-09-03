@@ -69,7 +69,7 @@ struct HistorySheet: View {
                         dismiss()
                     }
                     .foregroundColor(.green)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: 16, weight: .semibold))
                 }
             }
         }
@@ -111,7 +111,7 @@ struct HistorySheet: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 25 : 20
+        isLargeDevice ? 30 : 25
     }
 }
 
@@ -218,33 +218,11 @@ struct HistoryRow: View {
             
             // Action buttons
             HStack(spacing: adaptiveActionButtonSpacing) {
-                Button(action: onEdit) {
-                    HStack(spacing: adaptiveEditButtonIconSpacing) {
-                        Image(systemName: "pencil")
-                            .font(.system(size: adaptiveEditButtonIconSize))
-                        Text("Edit")
-                            .font(.system(size: adaptiveEditButtonFontSize))
-                    }
-                    .foregroundColor(.blue)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: adaptiveActionButtonHeight)
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(adaptiveActionButtonCornerRadius)
-                }
-                
-                Button(action: onDelete) {
-                    HStack(spacing: adaptiveDeleteButtonIconSpacing) {
-                        Image(systemName: "trash")
-                            .font(.system(size: adaptiveDeleteButtonIconSize))
-                        Text("Delete")
-                            .font(.system(size: adaptiveDeleteButtonFontSize))
-                    }
-                    .foregroundColor(.red)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: adaptiveActionButtonHeight)
-                    .background(Color.red.opacity(0.1))
-                    .cornerRadius(adaptiveActionButtonCornerRadius)
-                }
+                // Edit button (secondary style since it's not the primary action)
+                CTAButton("Edit", systemImage: "pencil", style: .secondary, action: onEdit)
+
+                // Delete button (destructive action)
+                CTAButton("Delete", systemImage: "trash", style: .destructive, action: onDelete)
             }
         }
         .padding(adaptiveRowPadding)
@@ -311,7 +289,7 @@ struct HistoryRow: View {
     }
     
     private var adaptiveActionButtonSpacing: CGFloat {
-        isLargeDevice ? 12 : 8
+        isLargeDevice ? 18 : 14
     }
     
     private var adaptiveEditButtonIconSpacing: CGFloat {
@@ -413,17 +391,7 @@ struct EditHistoryFermentationSheet: View {
                             .font(.system(size: adaptiveRatingTitleSize, weight: .semibold))
                             .foregroundColor(.black)
                         
-                        HStack(spacing: adaptiveStarSpacing) {
-                            ForEach(1...5, id: \.self) { star in
-                                Button(action: {
-                                    selectedRating = star
-                                }) {
-                                    Image(systemName: star <= selectedRating ? "star.fill" : "star")
-                                        .font(.system(size: adaptiveStarSize))
-                                        .foregroundColor(star <= selectedRating ? .yellow : .gray)
-                                }
-                            }
-                        }
+                        CTARatingView(rating: $selectedRating)
                     }
                     
                     // Notes section
@@ -546,29 +514,11 @@ struct EditHistoryFermentationSheet: View {
                     
                     // Action buttons
                     VStack(spacing: adaptiveButtonSpacing) {
-                        // Cancel button
-                        Button(action: {
+                        CTAButton("Cancel", style: .outline, action: {
                             dismiss()
-                        }) {
-                            Text("Cancel")
-                                .font(.system(size: adaptiveButtonFontSize, weight: .medium))
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: adaptiveButtonHeight)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(adaptiveButtonCornerRadius)
-                        }
-                        
-                        // Save button
-                        Button(action: saveChanges) {
-                            Text("Save Changes")
-                                .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: adaptiveButtonHeight)
-                                .background(Color.green)
-                                .cornerRadius(adaptiveButtonCornerRadius)
-                        }
+                        })
+
+                        CTAButton("Save Changes", style: .primary, action: saveChanges)
                     }
                 }
                 .padding(.horizontal, adaptiveHorizontalPadding)

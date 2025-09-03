@@ -88,33 +88,12 @@ struct StarterScreenView: View {
                 .padding(.horizontal, adaptiveHorizontalPadding)
 
             // CTA Button - Always show "Start New Batch"
-            Button(action: onStartNew) {
-                Text("Start New Batch")
-                    .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, adaptiveButtonPadding)
-                    .background(Color.green)
-                    .cornerRadius(adaptiveCornerRadius)
-                    .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 2)
-            }
-            .padding(.horizontal, adaptiveHorizontalPadding)
+            CTAButton("Start New Batch", style: .primary, action: onStartNew)
+                .padding(.horizontal, adaptiveHorizontalPadding)
 
             // History button
-            Button(action: onViewHistory) {
-                HStack(spacing: adaptiveIconSpacing) {
-                    Image(systemName: "clock.arrow.circlepath")
-                        .font(.system(size: adaptiveIconSize))
-                    Text("View History")
-                        .font(.system(size: adaptiveSecondaryButtonFontSize))
-                }
-                .foregroundColor(.green)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, adaptiveSecondaryButtonVerticalPadding)
-                .background(Color.green.opacity(0.1))
-                .cornerRadius(adaptiveSecondaryCornerRadius)
-            }
-            .padding(.horizontal, adaptiveHorizontalPadding)
+            CTAButton("View History", systemImage: "clock.arrow.circlepath", style: .secondary, action: onViewHistory)
+                .padding(.horizontal, adaptiveHorizontalPadding)
 
             Spacer(minLength: adaptiveMiddleSpacerMinLength)
 
@@ -179,11 +158,11 @@ struct StarterScreenView: View {
     private var adaptiveSubtitleSize: CGFloat {
         isLargeDevice ? 20 : 17
     }
-    
+
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 35 : 25
+        isLargeDevice ? 30 : 25
     }
-    
+
     private var adaptiveActiveBatchesSpacing: CGFloat {
         isLargeDevice ? 16 : 12
     }
@@ -430,36 +409,11 @@ struct ActiveBatchesView: View {
                             
                             // CTA buttons at bottom for multiple batches
                             VStack(spacing: adaptiveMultipleBatchButtonSpacing) {
-                                Button(action: onStartNew) {
-                                    HStack(spacing: adaptiveMultipleBatchButtonIconSpacing) {
-                                        Image(systemName: "plus.circle.fill")
-                                            .font(.system(size: adaptiveMultipleBatchButtonIconSize))
-                                        Text("Start New Batch")
-                                            .font(.system(size: adaptiveMultipleBatchButtonFontSize, weight: .semibold))
-                                    }
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, adaptiveMultipleBatchButtonPadding)
-                                    .background(Color.green)
-                                    .cornerRadius(adaptiveMultipleBatchButtonCornerRadius)
-                                    .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 2)
-                                }
-                                
-                                Button(action: {
+                                CTAButton("Start New Batch", systemImage: "plus.circle.fill", style: .primary, action: onStartNew)
+
+                                CTAButton("View History", systemImage: "clock.arrow.circlepath", style: .secondary, action: {
                                     showingHistory = true
-                                }) {
-                                    HStack(spacing: adaptiveMultipleBatchButtonIconSpacing) {
-                                        Image(systemName: "clock.arrow.circlepath")
-                                            .font(.system(size: adaptiveMultipleBatchButtonIconSize))
-                                        Text("View History")
-                                            .font(.system(size: adaptiveMultipleBatchButtonFontSize, weight: .semibold))
-                                    }
-                                    .foregroundColor(.green)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, adaptiveMultipleBatchButtonPadding)
-                                    .background(Color.green.opacity(0.1))
-                                    .cornerRadius(adaptiveMultipleBatchButtonCornerRadius)
-                                }
+                                })
                             }
                             .padding(.horizontal, adaptiveHorizontalPadding)
                             .padding(.bottom, adaptiveBottomPadding)
@@ -505,9 +459,9 @@ struct ActiveBatchesView: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 25 : 20
+        isLargeDevice ? 30 : 25
     }
-    
+
     private var adaptiveBatchBottomPadding: CGFloat {
         isLargeDevice ? 20 : 16
     }
@@ -650,19 +604,7 @@ struct ActiveFermentationCard: View {
                 .padding(.vertical, 8)
             
             // Edit duration button (pencil icon) - BELOW ANIMATION
-            Button(action: onEdit) {
-                HStack(spacing: 8) {
-                    Image(systemName: "pencil")
-                        .font(.system(size: 14, weight: .medium))
-                    Text("Edit Duration")
-                        .font(.system(size: 14, weight: .medium))
-                }
-                .foregroundColor(.green)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(Color.green.opacity(0.1))
-                .cornerRadius(20)
-            }
+            CTAButton("Edit Duration", systemImage: "pencil", style: .secondary, action: onEdit)
             
             // Info cards
             VStack(spacing: adaptiveInfoCardSpacing) {
@@ -687,56 +629,18 @@ struct ActiveFermentationCard: View {
             
             // Action buttons
             VStack(spacing: adaptiveActionButtonSpacing) {
-                Button(action: onStartNew) {
-                    HStack(spacing: adaptiveButtonIconSpacing) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size: adaptiveButtonIconSize))
-                        Text("Start Second Batch")
-                            .font(.system(size: adaptiveActionButtonFontSize, weight: .semibold))
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, adaptiveActionButtonPadding)
-                    .background(Color.blue)
-                    .cornerRadius(adaptiveActionButtonCornerRadius)
-                }
-                
-                Button(action: {
+                // Start Second Batch button (using primary style since it's a main action)
+                CTAButton("Start Second Batch", systemImage: "plus.circle.fill", style: .primary, action: onStartNew)
+
+                // End Fermentation button (destructive action)
+                CTAButton("End Fermentation", systemImage: "stop.circle", style: .destructive, action: {
                     showingFinishConfirmation = true
-                }) {
-                    HStack(spacing: adaptiveButtonIconSpacing) {
-                        Image(systemName: "stop.circle")
-                            .font(.system(size: adaptiveButtonIconSize))
-                        Text("End Fermentation")
-                            .font(.system(size: adaptiveActionButtonFontSize, weight: .semibold))
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, adaptiveActionButtonPadding)
-                    .background(Color.red)
-                    .cornerRadius(adaptiveActionButtonCornerRadius)
-                }
-                
-                // History button below End Fermentation
-                Button(action: {
+                })
+
+                // History button (secondary action with outline style for distinction)
+                CTAButton("History", systemImage: "clock.arrow.circlepath", style: .outline, action: {
                     showingHistory = true
-                }) {
-                    HStack(spacing: adaptiveButtonIconSpacing) {
-                        Image(systemName: "clock.arrow.circlepath")
-                            .font(.system(size: adaptiveButtonIconSize))
-                        Text("History")
-                            .font(.system(size: adaptiveActionButtonFontSize, weight: .semibold))
-                    }
-                    .foregroundColor(.green)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, adaptiveActionButtonPadding)
-                    .background(Color.green.opacity(0.1))
-                    .cornerRadius(adaptiveActionButtonCornerRadius)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: adaptiveActionButtonCornerRadius)
-                            .stroke(Color.green, lineWidth: 1)
-                    )
-                }
+                })
             }
         }
         .padding(.horizontal, adaptiveHorizontalPadding)
@@ -875,9 +779,9 @@ struct ActiveFermentationCard: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 25 : 20
+        isLargeDevice ? 30 : 25
     }
-    
+
     private var adaptiveVerticalPadding: CGFloat {
         isLargeDevice ? 30 : 25
     }
@@ -1021,49 +925,23 @@ struct CompletionView: View {
             }
             
             VStack(spacing: adaptiveButtonSpacing) {
-                Button(action: {
+                // Rate & Add Notes - custom orange button for celebration context
+                CTAButton("Rate & Add Notes", style: .primary, action: {
                     showingRatingSheet = true
-                }) {
-                    HStack {
-                        Text("Rate & Add Notes")
-                            .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: adaptiveButtonMaxWidth)
-                    .padding(.vertical, adaptiveButtonPadding)
-                    .background(Color.orange)
-                    .cornerRadius(adaptiveButtonCornerRadius)
-                }
-                
-                Button(action: {
+                })
+                .background(Color.orange)
+                .cornerRadius(isLargeDevice ? 12 : 10)
+                .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 2)
+
+                CTAButton("Start New Batch", style: .primary, action: {
                     // Show the start fermentation sheet
                     showingStartSheet = true
-                }) {
-                    Text("Start New Batch")
-                        .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: adaptiveButtonMaxWidth)
-                        .padding(.vertical, adaptiveButtonPadding)
-                        .background(Color.green)
-                        .cornerRadius(adaptiveButtonCornerRadius)
-                }
-                
-                Button(action: {
+                })
+
+                CTAButton("Back to Active Batches", style: .outline, action: {
                     // Go back to active batches view
                     fermentationManager.completeRatingAndNotes()
-                }) {
-                    Text("Back to Active Batches")
-                        .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
-                        .foregroundColor(.green)
-                        .frame(maxWidth: adaptiveButtonMaxWidth)
-                        .padding(.vertical, adaptiveButtonPadding)
-                        .background(Color.green.opacity(0.1))
-                        .cornerRadius(adaptiveButtonCornerRadius)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: adaptiveButtonCornerRadius)
-                                .stroke(Color.green, lineWidth: 2)
-                        )
-                }
+                })
             }
             .padding(.horizontal, adaptiveHorizontalPadding)
         }
@@ -1120,9 +998,9 @@ struct CompletionView: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 35 : 25
+        isLargeDevice ? 30 : 25
     }
-    
+
     private var adaptiveButtonSpacing: CGFloat {
         isLargeDevice ? 11 : 8
     }
@@ -1307,27 +1185,12 @@ struct DetailedFermentationView: View {
         VStack(spacing: 0) {
             // Header with back button and edit button
             HStack {
-                Button(action: onBack) {
-                    HStack(spacing: adaptiveBackButtonSpacing) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: adaptiveBackButtonIconSize, weight: .semibold))
-                        Text("Back to List")
-                            .font(.system(size: adaptiveBackButtonTextSize, weight: .medium))
-                    }
-                    .foregroundColor(.green)
-                }
-                
+                CTAButton("Back to List", systemImage: "chevron.left", style: .text, action: onBack)
+
                 Spacer()
-                
+
                 // Edit button (small pencil icon) - TOP OF PAGE
-                Button(action: onEdit) {
-                    Image(systemName: "pencil")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.green)
-                        .padding(12)
-                        .background(Color.green.opacity(0.1))
-                        .clipShape(Circle())
-                }
+                CTAIconButton(style: .secondary, systemImage: "pencil", action: onEdit)
             }
             .padding(.horizontal, adaptiveHeaderHorizontalPadding)
             .padding(.vertical, adaptiveHeaderVerticalPadding)
@@ -1402,21 +1265,9 @@ struct DetailedFermentationView: View {
                     }
                     
                     // Single action button
-                    Button(action: {
+                    CTAButton("End Fermentation", systemImage: "stop.circle", style: .destructive, action: {
                         showingFinishConfirmation = true
-                    }) {
-                        HStack(spacing: adaptiveActionButtonIconSpacing) {
-                            Image(systemName: "stop.circle")
-                                .font(.system(size: adaptiveActionButtonIconSize))
-                            Text("End Fermentation")
-                                .font(.system(size: adaptiveActionButtonFontSize, weight: .semibold))
-                        }
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, adaptiveActionButtonPadding)
-                        .background(Color.red)
-                        .cornerRadius(adaptiveActionButtonCornerRadius)
-                    }
+                    })
                     .padding(.horizontal, adaptiveActionButtonHorizontalPadding)
                     .padding(.bottom, adaptiveActionButtonBottomPadding)
                 }

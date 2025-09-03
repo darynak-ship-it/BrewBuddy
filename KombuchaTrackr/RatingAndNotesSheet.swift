@@ -130,17 +130,7 @@ struct RatingAndNotesTab: View {
                     .font(.system(size: adaptiveRatingTitleSize, weight: .semibold))
                     .foregroundColor(.black)
                 
-                HStack(spacing: adaptiveStarSpacing) {
-                    ForEach(1...5, id: \.self) { star in
-                        Button(action: {
-                            selectedRating = star
-                        }) {
-                            Image(systemName: star <= selectedRating ? "star.fill" : "star")
-                                .font(.system(size: adaptiveStarSize))
-                                .foregroundColor(star <= selectedRating ? .yellow : .gray)
-                        }
-                    }
-                }
+                CTARatingView(rating: $selectedRating)
             }
             
             // Notes section
@@ -200,21 +190,9 @@ struct RatingAndNotesTab: View {
             // Action buttons
             VStack(spacing: adaptiveButtonSpacing) {
                 // History button
-                Button(action: {
+                CTAButton("View History", systemImage: "clock.arrow.circlepath", style: .secondary, action: {
                     showingHistory = true
-                }) {
-                    HStack(spacing: adaptiveHistoryButtonIconSpacing) {
-                        Image(systemName: "clock.arrow.circlepath")
-                            .font(.system(size: adaptiveHistoryButtonIconSize))
-                        Text("View History")
-                            .font(.system(size: adaptiveHistoryButtonFontSize))
-                    }
-                    .foregroundColor(.green)
-                    .frame(maxWidth: adaptiveHistoryButtonMaxWidth)
-                    .frame(height: adaptiveHistoryButtonHeight)
-                    .background(Color.green.opacity(0.1))
-                    .cornerRadius(adaptiveHistoryButtonCornerRadius)
-                }
+                })
             }
         }
         .padding(.horizontal, adaptiveHorizontalPadding)
@@ -280,7 +258,7 @@ struct RatingAndNotesTab: View {
     }
     
     private var adaptiveButtonSpacing: CGFloat {
-        isLargeDevice ? 20 : 16
+        isLargeDevice ? 18 : 14
     }
     
     private var adaptiveHistoryButtonIconSpacing: CGFloat {
@@ -308,11 +286,11 @@ struct RatingAndNotesTab: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 40 : 30
+        isLargeDevice ? 30 : 25
     }
-    
+
     private var adaptiveVerticalPadding: CGFloat {
-        isLargeDevice ? 40 : 30
+        isLargeDevice ? 30 : 25
     }
     
     // MARK: - Computed Properties
