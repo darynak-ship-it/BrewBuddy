@@ -44,7 +44,7 @@ struct StartFermentationSheet: View {
                     
                     // Subtitle moved under the image
                     Text("Choose how long to ferment your kombucha for")
-                        .font(.system(size: adaptiveSubtitleSize, weight: .semibold))
+                        .font(.system(size: adaptiveSubtitleSize, weight: .regular))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
                     
@@ -99,17 +99,21 @@ struct StartFermentationSheet: View {
                     
                     Spacer()
                     
-                    // CTA button
+                    // CTA button - Let's Go!
                     Button(action: startFermentation) {
                         Text("Let's Go!")
                             .font(.system(size: adaptiveStartButtonFontSize, weight: .semibold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: adaptiveStartButtonHeight)
+                            .frame(height: adaptiveStartButtonHeight)   // keep your existing height var
                             .background(Color.green)
                             .cornerRadius(adaptiveStartButtonCornerRadius)
+                            .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 2) // added shadow
                     }
+                    
                     .disabled(selectedDays <= 0)
+
+
                 }
                 .padding(.horizontal, adaptiveHorizontalPadding)
                 .padding(.vertical, adaptiveVerticalPadding)

@@ -87,7 +87,7 @@ struct StarterScreenView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, adaptiveHorizontalPadding)
 
-            // CTA Button - Always show "Start New Batch"
+            // CTA Button "Start New Batch"
             Button(action: onStartNew) {
                 Text("Start New Batch")
                     .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
@@ -106,13 +106,14 @@ struct StarterScreenView: View {
                     Image(systemName: "clock.arrow.circlepath")
                         .font(.system(size: adaptiveIconSize))
                     Text("View History")
-                        .font(.system(size: adaptiveSecondaryButtonFontSize))
+                        .font(.system(size: adaptiveButtonFontSize, weight: .semibold))
                 }
                 .foregroundColor(.green)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, adaptiveSecondaryButtonVerticalPadding)
-                .background(Color.green.opacity(0.1))
-                .cornerRadius(adaptiveSecondaryCornerRadius)
+                .padding(.vertical, adaptiveButtonPadding)
+                .background(Color.green.opacity(0.1))   // keep light green
+                .cornerRadius(adaptiveCornerRadius)
+                .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
             }
             .padding(.horizontal, adaptiveHorizontalPadding)
 
@@ -724,7 +725,7 @@ struct ActiveFermentationCard: View {
                     HStack(spacing: adaptiveButtonIconSpacing) {
                         Image(systemName: "clock.arrow.circlepath")
                             .font(.system(size: adaptiveButtonIconSize))
-                        Text("History")
+                        Text("View History")
                             .font(.system(size: adaptiveActionButtonFontSize, weight: .semibold))
                     }
                     .foregroundColor(.green)
