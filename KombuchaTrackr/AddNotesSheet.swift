@@ -107,33 +107,12 @@ struct AddNotesSheet: View {
                                 .frame(height: 80)
                         }
                     }
-                    .padding(.horizontal, adaptiveFormHorizontalPadding)
-                    
+
                     // Action buttons
                     VStack(spacing: adaptiveButtonSpacing) {
-                        Button(action: saveNotes) {
-                            Text("Save")
-                                .font(.system(size: adaptiveSaveButtonFontSize, weight: .semibold))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: adaptiveSaveButtonHeight)
-                                .background(Color.green)
-                                .cornerRadius(adaptiveSaveButtonCornerRadius)
-                        }
-                        
-                        Button(action: skipNotes) {
-                            Text("Skip")
-                                .font(.system(size: adaptiveSkipButtonFontSize, weight: .semibold))
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: adaptiveSkipButtonHeight)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(adaptiveSkipButtonCornerRadius)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: adaptiveSkipButtonCornerRadius)
-                                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                                )
-                        }
+                        CTAButton("Save", style: .primary, action: saveNotes)
+
+                        CTAButton("Skip", style: .outline, action: skipNotes)
                     }
                 }
                 .padding(.horizontal, adaptiveHorizontalPadding)
@@ -210,7 +189,7 @@ struct AddNotesSheet: View {
     }
     
     private var adaptiveButtonSpacing: CGFloat {
-        isLargeDevice ? 10 : 8
+        isLargeDevice ? 18 : 14
     }
     
     private var adaptiveSaveButtonFontSize: CGFloat {
@@ -238,11 +217,11 @@ struct AddNotesSheet: View {
     }
     
     private var adaptiveHorizontalPadding: CGFloat {
-        isLargeDevice ? 25 : 20
+        isLargeDevice ? 30 : 25
     }
-    
+
     private var adaptiveVerticalPadding: CGFloat {
-        isLargeDevice ? 16 : 12
+        isLargeDevice ? 30 : 25
     }
 }
 
